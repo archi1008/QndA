@@ -8,6 +8,7 @@ import * as fs from 'fs';
 import * as dotenv from 'dotenv';
 import { MongoClient } from "mongodb";
 import mongoose  from "mongoose";
+import cors from 'cors';
 
 const textFilePath = 'file.txt';
 const fileContent = fs.readFileSync(textFilePath, 'utf-8');
@@ -19,7 +20,17 @@ const doc = {content: fileContent}
 
 const app = express();
 dotenv.config();
-
+app.use(cors());
+const allowedOrigins = ['http://localhost:3000', 'https://643c1506ccf92665547ee164--regal-sfogliatella-8e70d3.netlify.app/'];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 app.use(express.json());
 
     mongoose.connect(url,{useNewUrlParser:true, useUnifiedTopology:true}).then((data)=>{
