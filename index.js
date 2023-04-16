@@ -33,16 +33,16 @@ app.use(cors({
 }));
 app.use(express.json());
 
-    mongoose.connect(url,{useNewUrlParser:true, useUnifiedTopology:true}).then((data)=>{
-        console.log("connected to mongodb successfully !");
-        console.log(`mongodb connected with server : ${data.connection.host}`);
-        const db = data.connection.db;
-        const collection = db.collection('data');
-        collection.insertOne(doc, function(err, result) {
-            if (err) throw err;
-            console.log('Text file inserted successfully:');
-          });
-    })
+    // mongoose.connect(url,{useNewUrlParser:true, useUnifiedTopology:true}).then((data)=>{
+    //     console.log("connected to mongodb successfully !");
+    //     console.log(`mongodb connected with server : ${data.connection.host}`);
+    //     const db = data.connection.db;
+    //     const collection = db.collection('data');
+    //     collection.insertOne(doc, function(err, result) {
+    //         if (err) throw err;
+    //         console.log('Text file inserted successfully:');
+    //       });
+    // })
 
 // Define route for receiving question data from frontend
 app.post('/question', async (req, res) => {
